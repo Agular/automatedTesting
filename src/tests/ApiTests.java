@@ -30,12 +30,12 @@ public class ApiTests {
     }
 
     @Test
-    public void isGeoLocationXNumber(){
+    public void isLongitudeFloat(){
 
     }
 
     @Test
-    public void isGeoLocationYNumber(){
+    public void isLatitudeFloat(){
 
     }
 }
