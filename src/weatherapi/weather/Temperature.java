@@ -8,7 +8,7 @@ public class Temperature {
 
     public Temperature(BigDecimal temperature){
         if(temperature == null){
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
         this.temperature = temperature;
     }

@@ -4,7 +4,9 @@ import weatherapi.weather.Coordinates;
 import weatherapi.weather.FiveDayForecastMaxMinTemperatures;
 import weatherapi.weather.Temperature;
 
-public class WeatherService {
+public class WeatherClient {
+
+    private QueryMaster queryMaster = new QueryMaster();
 
     public Temperature getCurrentTemperatureByCityId(int cityId){
         //TODO

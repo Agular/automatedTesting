@@ -6,7 +6,7 @@ public class Coordinates {
 
     public Coordinates(Integer longitude, Integer latitude) {
         if (longitude == null || latitude == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
         this.longitude = longitude;
         this.latitude = latitude;

@@ -13,7 +13,7 @@ public class FiveDayForecastMaxMinTemperatures {
             throws IllegalArraySizeException, IllegalArrayOrderException {
 
         if (fiveDayMaxMinTemperatures == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         } else if (arraySizeIsNotFive(fiveDayMaxMinTemperatures)) {
             throw new IllegalArraySizeException("Array must have exactly 5 day temperatures!");
         } else if (arrayIsNotOrderedByDate(fiveDayMaxMinTemperatures)) {

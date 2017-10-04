@@ -2,10 +2,12 @@ package tests;
 
 import org.junit.Assert;
 import org.junit.Test;
-import weatherapi.service.WeatherService;
+import weatherapi.service.WeatherClient;
 import weatherapi.weather.Coordinates;
 
 public class LogicTests {
+    private final int CITY_ID = 588409;
+
 
     @Test
     public void is3DayForecastMaxTemperatureCorrect() {
@@ -29,10 +31,9 @@ public class LogicTests {
 
     @Test
     public void isCoordinatesCorrect(){
-        WeatherService weatherService = new WeatherService();
-        int cityId = 588409;
+        WeatherClient weatherClient = new WeatherClient();
         Coordinates expectedCoordinates = new Coordinates(248, 544);
-        Coordinates actualCoordinates = weatherService.getCoordinatesByCityId(588409);
+        Coordinates actualCoordinates = weatherClient.getCoordinatesByCityId(CITY_ID);
         Assert.assertEquals(expectedCoordinates, actualCoordinates);
     }
 }

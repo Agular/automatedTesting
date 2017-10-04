@@ -9,7 +9,7 @@ public class OneDayMaxMinTemperatures{
 
     public OneDayMaxMinTemperatures(LocalDate date, Temperature maxTemperature, Temperature minTemperature){
         if(date == null || maxTemperature == null || minTemperature == null){
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
         this.date = date;
         this.maxTemperature = maxTemperature;
