@@ -30,12 +30,12 @@ public class FiveDayForecastMaxMinTemperatures {
     private boolean arrayIsNotOrderedByDate(ArrayList<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures) {
 
         for (int i = 0; i < fiveDayMaxMinTemperatures.size() - 1; i++) {
-            if (fiveDayMaxMinTemperatures.get(i).getDate().compareTo(
-                    fiveDayMaxMinTemperatures.get(i + 1).getDate()) >= 0) {
-                return false;
+            if (fiveDayMaxMinTemperatures.get(i).getDate().plusDays(1).compareTo(
+                    fiveDayMaxMinTemperatures.get(i + 1).getDate()) != 0) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private ArrayList<OneDayMaxMinTemperatures> getFiveDayMaxMinTemperatures() {

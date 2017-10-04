@@ -76,11 +76,26 @@ public class ClassTests {
         FiveDayForecastMaxMinTemperatures temperatures = new FiveDayForecastMaxMinTemperatures(temperaturesArray);
     }
 
-//    @Test(expected = IllegalArrayOrderException.class)
-//    public void FiveDayTemperaturesInAscendingOrder() throws IllegalArrayOrderException, IllegalArraySizeException {
-//        ArrayList<OneDayMaxMinTemperatures> temperaturesArray = new ArrayList<>();
-//
-//
-//        FiveDayForecastMaxMinTemperatures temperatures = new FiveDayForecastMaxMinTemperatures(temperaturesArray);
-//    }
+    @Test//(expected = IllegalArrayOrderException.class)
+    public void FiveDayTemperaturesIsNotInAscendingOrder() throws IllegalArrayOrderException, IllegalArraySizeException {
+        ArrayList<OneDayMaxMinTemperatures> temperaturesArray = new ArrayList<>();
+        LocalDate date = LocalDate.now();
+        Temperature temperature = new Temperature(BigDecimal.TEN);
+        for (int i = 4; i > 0; i--){
+            temperaturesArray.add(new OneDayMaxMinTemperatures(date.minusDays(i), temperature, temperature));
+        }
+        temperaturesArray.add(new OneDayMaxMinTemperatures(LocalDate.now().minusDays(2), temperature, temperature));
+        FiveDayForecastMaxMinTemperatures temperatures = new FiveDayForecastMaxMinTemperatures(temperaturesArray);
+    }
+
+    @Test
+    public void FiveDayTemperaturesInAscendingOrder() throws IllegalArrayOrderException, IllegalArraySizeException {
+        ArrayList<OneDayMaxMinTemperatures> temperaturesArray = new ArrayList<>();
+        LocalDate date = LocalDate.now();
+        Temperature temperature = new Temperature(BigDecimal.TEN);
+        for (int i = 5; i > 0; i--){
+            temperaturesArray.add(new OneDayMaxMinTemperatures(date.minusDays(i), temperature, temperature));
+        }
+        FiveDayForecastMaxMinTemperatures temperatures = new FiveDayForecastMaxMinTemperatures(temperaturesArray);
+    }
 }
