@@ -16,4 +16,9 @@ public class Temperature {
     public BigDecimal getTemperature() {
         return temperature;
     }
+
+    @Override
+    public String toString(){
+        return temperature.toString();
+    }
 }
