@@ -3,13 +3,13 @@ package weatherapi.weather;
 import weatherapi.exceptions.IllegalArraySizeException;
 import weatherapi.exceptions.IllegalArrayOrderException;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FiveDayForecastMaxMinTemperatures {
 
-    private ArrayList<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures;
+    private List<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures;
 
-    public FiveDayForecastMaxMinTemperatures(ArrayList<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures)
+    public FiveDayForecastMaxMinTemperatures(List<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures)
             throws IllegalArraySizeException, IllegalArrayOrderException {
 
         if (fiveDayMaxMinTemperatures == null) {
@@ -22,12 +22,12 @@ public class FiveDayForecastMaxMinTemperatures {
         this.fiveDayMaxMinTemperatures = fiveDayMaxMinTemperatures;
     }
 
-    private boolean arraySizeIsNotFive(ArrayList<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures) {
+    private boolean arraySizeIsNotFive(List<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures) {
 
         return fiveDayMaxMinTemperatures.size() != 5;
     }
 
-    private boolean arrayIsNotOrderedByDate(ArrayList<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures) {
+    private boolean arrayIsNotOrderedByDate(List<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures) {
 
         for (int i = 0; i < fiveDayMaxMinTemperatures.size() - 1; i++) {
             if (fiveDayMaxMinTemperatures.get(i).getDate().plusDays(1).compareTo(
@@ -38,7 +38,36 @@ public class FiveDayForecastMaxMinTemperatures {
         return false;
     }
 
-    private ArrayList<OneDayMaxMinTemperatures> getFiveDayMaxMinTemperatures() {
+    private List<OneDayMaxMinTemperatures> getFiveDayMaxMinTemperatures() {
         return fiveDayMaxMinTemperatures;
+    }
+
+    @Override
+    public String toString() {
+        if (fiveDayMaxMinTemperatures != null) {
+            String string = "";
+            for (int i = 0; i < fiveDayMaxMinTemperatures.size() ; i++) {
+                string = string + fiveDayMaxMinTemperatures.get(i) + "\n";
+            }
+            return string;
+        } else return "";
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof FiveDayForecastMaxMinTemperatures) {
+            return this.fiveDayMaxMinTemperatures.equals(((FiveDayForecastMaxMinTemperatures)other).fiveDayMaxMinTemperatures);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hashCode = 1;
+        hashCode = 31 * hashCode + fiveDayMaxMinTemperatures.hashCode();
+        return hashCode;
     }
 }
