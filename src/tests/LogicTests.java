@@ -9,11 +9,13 @@ import weatherapi.exceptions.IllegalArraySizeException;
 import weatherapi.service.WeatherAPI;
 import weatherapi.service.WeatherClient;
 import weatherapi.service.WeatherHelper;
+import weatherapi.service.WeatherServiceDao;
 import weatherapi.weather.Coordinates;
 import weatherapi.weather.FiveDayForecastMaxMinTemperatures;
 import weatherapi.weather.OneDayMaxMinTemperatures;
 import weatherapi.weather.Temperature;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;

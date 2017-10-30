@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import weatherapi.service.WeatherAPI;
+import weatherapi.service.WeatherClient;
+
+import java.io.FileNotFoundException;
 
 public class ApiTests {
 
@@ -44,5 +47,29 @@ public class ApiTests {
     public void is5DayForecastArrayLengthCorrect() {
         JsonNode node = weatherApi.forecastQuery(CITY_ID, API_KEY);
         Assert.assertEquals(40, node.get("list").size());
+    }
+
+    @Test(expected = FileNotFoundException.class)
+    public void getCityIdFromFileThrowsFileNotFoundException() throws FileNotFoundException {
+        WeatherClient weatherClient = new WeatherClient(API_KEY);
+        weatherClient.getCoordinatesByCityIdFromTextFile("unfindable_textfile.txt");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getCityIDFromFileWhenFileIsEmptyThrowsIllegalArgumentException() throws FileNotFoundException {
+        WeatherClient weatherClient = new WeatherClient(API_KEY);
+        weatherClient.getCoordinatesByCityIdFromTextFile("empty_file.txt");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getCityIDFromFileStringIsNotNumericThrowsIllegalArgumentException() throws FileNotFoundException {
+        WeatherClient weatherClient = new WeatherClient(API_KEY);
+        weatherClient.getCoordinatesByCityIdFromTextFile("hasNotNumericString.txt");
+    }
+
+    @Test()
+    public void getGeoLocationWithCityIdFromTextFileSuccessfulQuery() throws FileNotFoundException {
+        WeatherClient weatherClient = new WeatherClient(API_KEY);
+        weatherClient.getCoordinatesByCityIdFromTextFile("tallinn.txt");
     }
 }
