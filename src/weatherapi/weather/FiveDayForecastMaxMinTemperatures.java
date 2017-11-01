@@ -14,17 +14,10 @@ public class FiveDayForecastMaxMinTemperatures {
 
         if (fiveDayMaxMinTemperatures == null) {
             throw new IllegalArgumentException();
-        } else if (arraySizeIsNotFive(fiveDayMaxMinTemperatures)) {
-            throw new IllegalArraySizeException("Array must have exactly 5 day temperatures!");
         } else if (arrayIsNotOrderedByDate(fiveDayMaxMinTemperatures)) {
             throw new IllegalArrayOrderException("Array objects must be ordered by date in ascending order");
         }
         this.fiveDayMaxMinTemperatures = fiveDayMaxMinTemperatures;
-    }
-
-    private boolean arraySizeIsNotFive(List<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures) {
-
-        return fiveDayMaxMinTemperatures.size() != 5;
     }
 
     private boolean arrayIsNotOrderedByDate(List<OneDayMaxMinTemperatures> fiveDayMaxMinTemperatures) {

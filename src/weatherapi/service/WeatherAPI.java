@@ -35,6 +35,7 @@ public class WeatherAPI {
             Scanner scanner = new Scanner(response);
             String responseBody = scanner.useDelimiter("\\A").next();
             ObjectMapper mapper = new ObjectMapper();
+            System.out.println(mapper.readTree(responseBody));
             return  mapper.readTree(responseBody);
         } catch (IOException e) {
             e.printStackTrace();

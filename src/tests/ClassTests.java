@@ -1,6 +1,5 @@
 package tests;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.Assert;
 import org.junit.Test;
 import weatherapi.exceptions.IllegalArrayOrderException;
@@ -93,9 +92,9 @@ public class ClassTests {
 
     @Test
     public void isOneDayTemperaturesHashCorrect(){
-        OneDayMaxMinTemperatures temperatures = new OneDayMaxMinTemperatures(LocalDate.now(), new Temperature(1.0), new Temperature(1.0));
+        OneDayMaxMinTemperatures temperatures = new OneDayMaxMinTemperatures(LocalDate.of(1996, 1, 12), new Temperature(1.0), new Temperature(1.0));
 
-        Assert.assertEquals(-358140587, temperatures.hashCode());
+        Assert.assertEquals(-400034421, temperatures.hashCode());
     }
 
     @Test

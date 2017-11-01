@@ -35,28 +35,20 @@ public class WeatherHelper {
     }
 
     public FiveDayForecastMaxMinTemperatures getFiveDayMaxMinTemperaturesFromNode(JsonNode apiResponse) throws IllegalArrayOrderException, IllegalArraySizeException {
-
         List<OneDayMaxMinTemperatures> temperaturesList = new ArrayList<>();
-        HashMap<String, OneDayMaxMinTemperatures> hashMapTemperatures = new HashMap<>();
-        LocalDate dateToday = LocalDate.now();
-
-        for (int daysToAdd = 1; daysToAdd <= 5; daysToAdd++) {
-            OneDayMaxMinTemperatures oneDayMaxMinTemperatures = new OneDayMaxMinTemperatures();
-            oneDayMaxMinTemperatures.setDate(LocalDate.now().plusDays(daysToAdd));
-            oneDayMaxMinTemperatures.setMinTemperature(new Temperature(Double.MAX_VALUE));
-            oneDayMaxMinTemperatures.setMaxTemperature(new Temperature(Double.MIN_VALUE));
-            hashMapTemperatures.put(oneDayMaxMinTemperatures.getDate().toString(), oneDayMaxMinTemperatures);
-        }
-
-        ArrayNode listNode = (ArrayNode) apiResponse.get("list");
-        Iterator<JsonNode> listIterator = listNode.elements();
+        Iterator<JsonNode> listIterator = apiResponse.get("list").elements();
+        OneDayMaxMinTemperatures oneDayMaxMinTemperatures = null;
         while (listIterator.hasNext()) {
             JsonNode threeHourNode = listIterator.next();
-            String nodeDateString = threeHourNode.get("dt_txt").toString().split(" ")[0].replace("\"", "");
-            if (nodeDateString.equals(dateToday.toString())) {
-                continue;
+            String nodeDateString = getDateStringFromNode(threeHourNode);
+            if (oneDayMaxMinTemperatures == null) {
+                oneDayMaxMinTemperatures = new OneDayMaxMinTemperatures(LocalDate.parse(nodeDateString),
+                        new Temperature(Double.MIN_VALUE), new Temperature(Double.MAX_VALUE));
+            } else if (!oneDayMaxMinTemperatures.getDate().equals(LocalDate.parse(nodeDateString))) {
+                temperaturesList.add(oneDayMaxMinTemperatures);
+                oneDayMaxMinTemperatures = new OneDayMaxMinTemperatures(LocalDate.parse(nodeDateString),
+                        new Temperature(Double.MIN_VALUE), new Temperature(Double.MAX_VALUE));
             }
-            OneDayMaxMinTemperatures oneDayMaxMinTemperatures = hashMapTemperatures.get(nodeDateString);
             double nodeTemperature = threeHourNode.get("main").get("temp").asDouble();
             if (oneDayMaxMinTemperatures.getMinTemperature().getValue() > nodeTemperature) {
                 oneDayMaxMinTemperatures.setMinTemperature(new Temperature(nodeTemperature));
@@ -65,19 +57,24 @@ public class WeatherHelper {
                 oneDayMaxMinTemperatures.setMaxTemperature(new Temperature(nodeTemperature));
             }
         }
-
-        for (int daysToAdd = 1; daysToAdd <= 5; daysToAdd++) {
-            OneDayMaxMinTemperatures oneDayTemperature = hashMapTemperatures.get(dateToday.plusDays(daysToAdd).toString());
-            convertOneDayMaxMinTemperaturesToCelsius(oneDayTemperature);
-            temperaturesList.add(oneDayTemperature);
-        }
+        temperaturesList.add(oneDayMaxMinTemperatures);
+        convertKelvinTemperaturesListToCelsiusTemperaturesList(temperaturesList);
         return new FiveDayForecastMaxMinTemperatures(temperaturesList);
     }
 
-    public double roundValue(double value){
+    private String getDateStringFromNode(JsonNode node) {
+        return node.get("dt_txt").toString().split(" ")[0].replace("\"", "");
+    }
+
+    private void convertKelvinTemperaturesListToCelsiusTemperaturesList(List<OneDayMaxMinTemperatures> temperaturesList) {
+        for (int i = 0; i < temperaturesList.size(); i++) {
+            convertOneDayMaxMinTemperaturesToCelsius(temperaturesList.get(i));
+        }
+    }
+
+    public double roundValue(double value) {
         double temp = value * 100;
         temp = Math.round(temp);
         return temp / 100;
     }
-
 }
