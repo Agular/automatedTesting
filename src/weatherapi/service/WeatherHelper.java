@@ -9,6 +9,9 @@ import weatherapi.weather.FiveDayForecastMaxMinTemperatures;
 import weatherapi.weather.OneDayMaxMinTemperatures;
 import weatherapi.weather.Temperature;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,5 +79,11 @@ public class WeatherHelper {
         double temp = value * 100;
         temp = Math.round(temp);
         return temp / 100;
+    }
+
+     void writeResultToOutputFile(String result) throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter("output.txt");
+        writer.print(result);
+        writer.close();
     }
 }

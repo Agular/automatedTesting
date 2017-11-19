@@ -30,19 +30,19 @@ public class WeatherClient {
         return weatherServiceDao.getFiveDayForecastMaxMinTemperatures(cityId, apiKey);
     }
 
-    public Temperature getCurrentTemperatureByCityIdFromTextFile(String filename) throws FileNotFoundException {
+    public void getCurrentTemperatureByCityIdFromTextFile(String filename) throws FileNotFoundException {
         int cityId = weatherServiceDao.getCityIdFromFile(filename);
-        return weatherServiceDao.getCurrentTemperature(cityId, apiKey);
+        weatherServiceDao.getCurrentTemperatureToFile(cityId, apiKey);
     }
 
-    public Coordinates getCoordinatesByCityIdFromTextFile(String filename) throws FileNotFoundException {
+    public void getCoordinatesByCityIdFromTextFile(String filename) throws FileNotFoundException {
         int cityId = weatherServiceDao.getCityIdFromFile(filename);
-        return weatherServiceDao.getCoordinates(cityId, apiKey);
+        weatherServiceDao.getCoordinatesToFile(cityId, apiKey);
     }
 
-    public FiveDayForecastMaxMinTemperatures getFiveDayForecastMaxMinTemperaturesByCityIdFromTextFile(String filename) throws IllegalArrayOrderException, IllegalArraySizeException, FileNotFoundException {
+    public void getFiveDayForecastMaxMinTemperaturesByCityIdFromTextFile(String filename) throws IllegalArrayOrderException, IllegalArraySizeException, FileNotFoundException {
         int cityId = weatherServiceDao.getCityIdFromFile(filename);
-        return weatherServiceDao.getFiveDayForecastMaxMinTemperatures(cityId, apiKey);
+        weatherServiceDao.getFiveDayForecastMaxMinTemperaturesToFile(cityId, apiKey);
     }
 
 }

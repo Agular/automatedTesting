@@ -21,7 +21,7 @@ public class Temperature {
 
     @Override
     public String toString(){
-        return temperature.toString();
+        return "Temperature: " + temperature.toString();
     }
 
     @Override

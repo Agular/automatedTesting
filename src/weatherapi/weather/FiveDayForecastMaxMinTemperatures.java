@@ -40,7 +40,10 @@ public class FiveDayForecastMaxMinTemperatures {
         if (fiveDayMaxMinTemperatures != null) {
             String string = "";
             for (int i = 0; i < fiveDayMaxMinTemperatures.size() ; i++) {
-                string = string + fiveDayMaxMinTemperatures.get(i) + "\n";
+                string = string + fiveDayMaxMinTemperatures.get(i);
+                if(i != fiveDayMaxMinTemperatures.size() -1){
+                    string = string + "\n";
+                }
             }
             return string;
         } else return "";

@@ -63,4 +63,19 @@ public class WeatherServiceDao {
             return Integer.parseInt(cityId);
         }
     }
+
+    void getCurrentTemperatureToFile(int cityId, String apiKey) throws FileNotFoundException {
+        Temperature temperature = getCurrentTemperature(cityId, apiKey);
+        weatherHelper.writeResultToOutputFile(temperature.toString());
+    }
+
+    void getCoordinatesToFile(int cityId, String apiKey) throws FileNotFoundException {
+        Coordinates coordinates = getCoordinates(cityId, apiKey);
+        weatherHelper.writeResultToOutputFile(coordinates.toString());
+    }
+
+    void getFiveDayForecastMaxMinTemperaturesToFile(int cityId, String apiKey) throws IllegalArrayOrderException, IllegalArraySizeException, FileNotFoundException {
+        FiveDayForecastMaxMinTemperatures temperatures = getFiveDayForecastMaxMinTemperatures(cityId, apiKey);
+        weatherHelper.writeResultToOutputFile(temperatures.toString());
+    }
 }
