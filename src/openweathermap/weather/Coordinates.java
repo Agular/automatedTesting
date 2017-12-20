@@ -1,4 +1,4 @@
-package weatherapi.weather;
+package openweathermap.weather;
 
 public class Coordinates {
     private Double longitude;
@@ -22,7 +22,7 @@ public class Coordinates {
 
     @Override
     public String toString(){
-        return "lon: " + longitude + " lat: " + latitude;
+        return "lon:" + longitude + " lat:" + latitude;
     }
 
     @Override

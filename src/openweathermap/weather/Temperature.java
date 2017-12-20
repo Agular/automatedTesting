@@ -1,4 +1,4 @@
-package weatherapi.weather;
+package openweathermap.weather;
 
 public class Temperature {
 
@@ -21,7 +21,7 @@ public class Temperature {
 
     @Override
     public String toString(){
-        return "Temperature: " + temperature.toString();
+        return "temp:" + temperature.toString();
     }
 
     @Override

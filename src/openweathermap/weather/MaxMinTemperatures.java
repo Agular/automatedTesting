@@ -1,16 +1,16 @@
-package weatherapi.weather;
+package openweathermap.weather;
 
 import java.time.LocalDate;
 
-public class OneDayMaxMinTemperatures {
+public class MaxMinTemperatures {
     private LocalDate date;
     private Temperature maxTemperature;
     private Temperature minTemperature;
 
-    public OneDayMaxMinTemperatures() {
+    public MaxMinTemperatures() {
     }
 
-    public OneDayMaxMinTemperatures(LocalDate date, Temperature maxTemperature, Temperature minTemperature) {
+    public MaxMinTemperatures(LocalDate date, Temperature maxTemperature, Temperature minTemperature) {
         if (date == null || maxTemperature == null || minTemperature == null) {
             throw new IllegalArgumentException();
         }
@@ -46,7 +46,7 @@ public class OneDayMaxMinTemperatures {
     @Override
     public String toString(){
         if (date != null && maxTemperature != null && minTemperature != null) {
-            return "Date: " + date.toString() + " Max Temperature: " + maxTemperature.toString() + " Min Temperature: " + minTemperature.toString();
+            return "date:" + date.toString() + " max:" + maxTemperature.toString() + " min:" + minTemperature.toString();
         }
         else return "";
     }
@@ -56,8 +56,8 @@ public class OneDayMaxMinTemperatures {
         if (this == other) {
             return true;
         }
-        if (other instanceof OneDayMaxMinTemperatures) {
-            OneDayMaxMinTemperatures o = (OneDayMaxMinTemperatures) other;
+        if (other instanceof MaxMinTemperatures) {
+            MaxMinTemperatures o = (MaxMinTemperatures) other;
             return this.date.equals((o.date)) && this.maxTemperature.equals(o.maxTemperature) && this.minTemperature.equals(o.minTemperature);
         }
         return false;
