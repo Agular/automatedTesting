@@ -108,7 +108,6 @@ public class WeatherHelper {
         } else {
             try {
                 String cityId = reader.readLine();
-                System.out.println(cityId);
                 if (cityId == null) {
                     throw new IllegalArgumentException("File is empty!");
                 }

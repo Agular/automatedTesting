@@ -220,7 +220,7 @@ public class ApiTests {
 
         when(helper.getCityIdFromFile(eq("inputBulk.txt"), eq(true))).thenReturn(Arrays.asList(588409));
         ForecastMaxMinTemperatures temperatures = new ForecastMaxMinTemperatures(
-                Collections.singletonList(new MaxMinTemperatures(LocalDate.now(), new Temperature(10.0), new Temperature(10.0)))
+                Collections.singletonList(new MaxMinTemperatures(LocalDate.of(2017, 12, 20), new Temperature(10.0), new Temperature(10.0)))
         );
         when(helper.getMaxMinTemperaturesFromNode(apiResponseCaptor.capture())).thenReturn(temperatures);
         when(helper.convertKelvinStringToCelsiusTemperature(apiResponseCaptor.capture())).thenReturn(new Temperature(15.0));
